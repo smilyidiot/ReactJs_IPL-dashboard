@@ -1,36 +1,24 @@
-// Write your code here
 import './index.css'
 
 const MatchCard = props => {
-  const {recentDetails} = props
-
-  const {result, competingTeam, competingTeamLogo, matchStatus} = recentDetails
-
-  //   const newLatestMatchDetails = {
-  //       umpires: latestMatchDetails.umpires,
-  //       result: latestMatchDetails.result,
-  //       manOfTheMatch: latestMatchDetails.man_of_the_match,
-  //       id: latestMatchDetails.id,
-  //       date: latestMatchDetails.date,
-  //       venue: latestMatchDetails.venue,
-  //       competingTeam: latestMatchDetails.competing_team,
-  //       competingTeamLogo: latestMatchDetails.competing_team_logo,
-  //       firstInnings: latestMatchDetails.first_innings,
-  //       secondInnings: latestMatchDetails.second_innings,
-  //       matchStatus: latestMatchDetails.match_status,
-  //     }
-  const status = matchStatus === 'Won' ? 'won' : 'lost'
+  const {matchDetails} = props
+  const {competingTeamLogo, competingTeam, matchStatus, result} = matchDetails
+  const getMatchStatusClassName = status =>
+    status === 'Won' ? 'match-won' : 'match-lost'
+  const matchStatusClassName = `match-status ${getMatchStatusClassName(
+    matchStatus,
+  )}`
 
   return (
-    <li className="recent-card">
+    <li className="match-item">
       <img
         src={competingTeamLogo}
+        className="competing-team-logo"
         alt={`competing team ${competingTeam}`}
-        className="recent-logo"
       />
-      <p className="recent-opp">{competingTeam}</p>
+      <p className="competing-team-name">{competingTeam}</p>
       <p className="result">{result}</p>
-      <p className={status}>{matchStatus}</p>
+      <p className={matchStatusClassName}>{matchStatus}</p>
     </li>
   )
 }
